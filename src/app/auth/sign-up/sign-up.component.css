@@ -1,0 +1,33 @@
+/* #container{
+    width: 100%;
+    display: flex;
+    height: 700px;
+    flex-direction: row;
+    justify-content: flex-start;
+    border: solid 1px black;
+    align-items: center;
+}
+.child{
+    width: 200px;
+    height: 200px;
+    /* flex: 1; */
+/* 
+}
+#child1{
+    background-color: red;
+    /* flex: 2; */
+/* 
+}
+
+
+#child2{
+    background-color: green;
+}
+
+#child3{
+    background-color: blue;
+}  */
+
+mat-form-field{
+    width: 300px;
+}
