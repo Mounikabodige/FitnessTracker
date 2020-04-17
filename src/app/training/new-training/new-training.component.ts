@@ -25,12 +25,17 @@ constructor(
   ngOnInit(): void {
     this.exerciseSusbscription =this.trainingService
     .exercisesChanged
-    .subscribe( exercises => this.exercises = exercises   );
+    .subscribe( exercises => (this.exercises = exercises)
+    );
     this.trainingService.fetchAvailableExercises();
   }
+
+
   onStartTraining(form :NgForm){
     this.trainingService.startExercise(form.value.exercise);
   } 
+
+
   ngOnDestroy(){
     this.exerciseSusbscription.unsubscribe();
   }

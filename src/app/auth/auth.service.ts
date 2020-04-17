@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Router } from '@angular/router';
 import { Subject } from 'rxjs' ;
+import { AngularFireAuth } from 'angularfire2/auth'
 
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
@@ -8,39 +9,46 @@ import { AuthData } from './auth-data.model';
 @Injectable()
 export class AuthService {
     authChange = new Subject<boolean>();
-    private user:User;
+    private isAuthenticated = false;
 
-    constructor(private router : Router){
+    constructor(private router : Router,
+        private afauth: AngularFireAuth){
 
     }
 
     registerUser(authData:AuthData){
-        this.user={
-            email:authData.email,
-            userId:Math.round(Math.random()*10000).toString()
-        };
-        this.authSuccessfull();
+        this.afauth.auth
+        .createUserWithEmailAndPassword(
+            authData.email,
+            authData.password)
+            .then(result =>{
+                this.authSuccessfull();
+            }).catch(error => {
+                console.log(error);
+            });
     }
     login(authData:AuthData){
-        this.user={
-            email:authData.email,
-            userId:Math.round(Math.random()*10000).toString()
-        };
-        this.authSuccessfull();
+        this.afauth.auth.signInWithEmailAndPassword(authData.email,
+            authData.password).then(result =>{
+                console.log(result);
+                this.authSuccessfull();
+            }).catch(error =>{
+                console.log(error);
+                });
     }
     logout(){
-        this.user =null;
         this.authChange.next(false);
         this.router.navigate(['/login']);
+        this.isAuthenticated = false;
+
 
     }
-    getUser(){
-        return {...this.user};
-    }
+    
     isAuth(){
-        return this.user != null;
+        return this.isAuthenticated;
     }
     private authSuccessfull(){
+        this.isAuthenticated = true;
         this.authChange.next(true);
         this.router.navigate(['/training']);
 
