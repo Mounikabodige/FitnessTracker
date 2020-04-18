@@ -28,6 +28,7 @@ fetchAvailableExercises(){
     collection('availableExercises')
     .snapshotChanges().pipe(
     map(docArray =>{
+        // throw(new Error());
         return  docArray.map(doc => {
             return {
             id : doc.payload.doc.id,
@@ -42,9 +43,12 @@ fetchAvailableExercises(){
         this.uiService.loadingStateChanged.next(false);
         this.availableExrcises = exercises;
         this.exercisesChanged.next([...this.availableExrcises]);
-    } ,error =>{
-        console.log(error);
-    }));
+    }, error =>{
+        this.uiService.loadingStateChanged.next(false);
+        this.uiService.showSnackBar('Fetching Exercises Failed,Please try again later', null , 3000);
+        this.exercisesChanged.next(null);
+
+        }));
 }
 
     startExercise(selectedId: string){

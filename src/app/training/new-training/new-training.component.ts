@@ -32,20 +32,23 @@ constructor(
         this.isLoading = isLoading;
       }
     );
-    this.exerciseSusbscription =this.trainingService
-    .exercisesChanged
+    this.exerciseSusbscription =this.trainingService.exercisesChanged
     .subscribe( exercises =>{
       this.exercises = exercises;
     } 
     );
+    this.fetchExercises();
+  }
+
+  fetchExercises(){
     this.trainingService.fetchAvailableExercises();
+
   }
 
 
   onStartTraining(form :NgForm){
     this.trainingService.startExercise(form.value.exercise);
   } 
-
 
   ngOnDestroy(){
     this.exerciseSusbscription.unsubscribe();
