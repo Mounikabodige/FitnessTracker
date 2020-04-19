@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 
 import { TrainingService } from '../training.service';
 import { Exercise } from '../exercise.model';
-import { CommentStmt, identifierModuleUrl } from '@angular/compiler';
 import { UIService } from 'src/app/shared/ui.service';
 
 @Component({
@@ -51,8 +50,13 @@ constructor(
   } 
 
   ngOnDestroy(){
+    if(this.exerciseSusbscription){
+
     this.exerciseSusbscription.unsubscribe();
+    }
+    if(this.loadingSubs){
     this.loadingSubs.unsubscribe();
+    }
 
   }
 }

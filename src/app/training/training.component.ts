@@ -10,7 +10,7 @@ import { TrainingService } from './training.service';
   styleUrls: ['./training.component.css']
 })
 
-export class TrainingComponent implements OnInit {
+export class TrainingComponent implements OnInit ,OnDestroy {
  ongoingTraining = false;
  exerciseSubscription : Subscription;
  
@@ -28,8 +28,10 @@ export class TrainingComponent implements OnInit {
       });
   }
 
-  onDestroy(){
+  ngOnDestroy(){
+    if(this.exerciseSubscription){
     this.exerciseSubscription.unsubscribe();
   }
+}
 
 }

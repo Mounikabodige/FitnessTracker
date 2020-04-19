@@ -1,28 +1,26 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LogInComponent } from './log-in/log-in.component';
-import {MaterialModule } from '../material.module'
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
 declarations:[
     SignUpComponent,
     LogInComponent,],
-imports:[CommonModule, 
-    FormsModule,
+
+
+imports:[
+    SharedModule,
     ReactiveFormsModule,
-    MaterialModule,
-    FlexLayoutModule,
     AngularFireAuthModule,
 
 ],
     
-exports:[]    
 })
 export class  AuthModule{
 
