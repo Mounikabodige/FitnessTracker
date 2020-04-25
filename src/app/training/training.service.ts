@@ -99,7 +99,7 @@ fetchAvailableExercises(){
         }));
     }
 
-    cancelSubsccriptions(){
+    cancelSubscriptions(){
         this.fbSubs.forEach(sub => sub.unsubscribe());
     }
 

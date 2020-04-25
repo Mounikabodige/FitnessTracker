@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { UIService } from '../../shared/ui.service';
+import { Store } from '@ngrx/store';
+import  * as fromApp from '../app.reducer';
+
 
 @Component({
   selector: 'app-log-in',
@@ -15,7 +18,8 @@ export class LogInComponent implements OnInit,OnDestroy {
   private loadingSubs : Subscription;
 
   constructor(private authService: AuthService,
-    private uiService : UIService) { }
+    private uiService : UIService,
+    private store : Store<>) { }
 
 
   ngOnInit(): void {
