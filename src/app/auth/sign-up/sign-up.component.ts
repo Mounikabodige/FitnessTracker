@@ -1,9 +1,11 @@
 import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { AuthService } from '../auth.service';
 import { UIService } from 'src/app/shared/ui.service';
+import * as fromRoot from '../../app.reducer';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +18,8 @@ export class SignUpComponent implements OnInit ,OnDestroy{
   private loadingSubs: Subscription;
 
   constructor(private authService:AuthService,
-    private uiService: UIService) { }
+    private uiService: UIService,
+    private store : Store<fromRoot.>) { }
 
   ngOnInit(): void {
     this.loadingSubs = this.uiService.loadingStateChanged.subscribe(isLoading =>

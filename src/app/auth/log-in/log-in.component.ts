@@ -1,10 +1,12 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+
 import { AuthService } from '../auth.service';
 import { UIService } from '../../shared/ui.service';
-import { Store } from '@ngrx/store';
-import  * as fromApp from '../app.reducer';
+import  * as fromRoot from './../../app.reducer';
 
 
 @Component({
@@ -12,21 +14,23 @@ import  * as fromApp from '../app.reducer';
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.css']
 })
-export class LogInComponent implements OnInit,OnDestroy {
+export class LogInComponent implements OnInit {
   loginForm : FormGroup;
-  isLoading = false;
+  isLoading$ : Observable<boolean>;
   private loadingSubs : Subscription;
 
   constructor(private authService: AuthService,
     private uiService : UIService,
-    private store : Store<>) { }
+    private store : Store< fromRoot.State>) { }
 
 
   ngOnInit(): void {
-    this.loadingSubs = this.uiService.loadingStateChanged
-    .subscribe(isLoading =>{
-      this.isLoading = isLoading;
-    });
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+    // this.loadingSubs = this.uiService.loadingStateChanged
+    // .subscribe(isLoading =>{
+    //   this.isLoading = isLoading;
+    // });
+    
     this.loginForm = new FormGroup({
       email : new FormControl('',{validators:[Validators.required,Validators.email]}),
       password: new FormControl('',{validators:[ Validators.required]}),
@@ -42,9 +46,9 @@ export class LogInComponent implements OnInit,OnDestroy {
     }
 
 
-    ngOnDestroy() {
-      if(this.loadingSubs){
-      this.loadingSubs.unsubscribe();
-      }
-    }
+    // ngOnDestroy() {
+    //   if(this.loadingSubs){
+    //   this.loadingSubs.unsubscribe();
+    //   }
+    // }
 }

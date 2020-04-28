@@ -20,7 +20,7 @@ import { environment } from '../environments/environment';
 import { UIService } from './shared/ui.service';
 import { AuthRoutingModule } from './auth/auth.routing.module';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { appReducer } from  './app.reducer';
+import { reducers } from  './app.reducer';
 
 
 @NgModule({
@@ -41,7 +41,7 @@ import { appReducer } from  './app.reducer';
     SharedModule,
     AuthRoutingModule,
     AngularFirestoreModule,
-    StoreModule.forRoot({ui: appReducer}),
+    StoreModule.forRoot(reducers),
   ],
 
   providers: [AuthService,TrainingService,UIService],
