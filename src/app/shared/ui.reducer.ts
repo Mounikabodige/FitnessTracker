@@ -15,13 +15,13 @@ export function uiReducer(state = initialState, action :Action){
         case 'START_LOADING':
             return{
                 isLoading :true
-            }
+            };
         case 'STOP_LOADING':
                 return{
                     isLoading :false
-               }
+               };
         default:{
-                return state;
+                return state
         }
     }
 }
