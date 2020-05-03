@@ -1,27 +1,33 @@
-import { Component,EventEmitter,Output } from '@angular/core';
+import { 
+  Component,
+  EventEmitter,
+  Output, 
+  OnInit
+} from '@angular/core';
+
 import { Subscription, Observable } from 'rxjs';
-import { AuthService } from '../../auth/auth.service';
 import { Store } from '@ngrx/store';
+
+import { AuthService } from '../../auth/auth.service';
 import * as fromRoot  from '../../app.reducer';
+
 
 @Component({
   selector: 'app-sidenav-list',
   templateUrl: './sidenav-list.component.html',
   styleUrls: ['./sidenav-list.component.css']
 })
-export class SidenavListComponent  {
+export class SidenavListComponent implements OnInit {
 
  @Output() closeToggle = new EventEmitter<void>();
-isAuth$ : Observable<boolean>;
-authSubscription :Subscription;
+  isAuth$ : Observable<boolean>;
+  authSubscription :Subscription;
 
-  constructor( private authService : AuthService,
-    private store : Store<fromRoot.State>) 
-    { }
+  constructor( private authService : AuthService, private store : Store<fromRoot.State>) { }
+  
+  ngOnInit(){
+    this.isAuth$= this.store.select(fromRoot.getIsAuth);  }
 
-    ngOnInit(){
-      this.isAuth$= this.store.select(fromRoot.getIsAuth);
-    }
   onClose(){
     this.closeToggle.emit();
   }

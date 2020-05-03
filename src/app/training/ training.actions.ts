@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Exercise } from './exercise.model';
+
 export const SET_AVAILABLE_TRAININGS = '[Training] Set Available Trainings' ;
 export const SET_FINISHED_TRAININGS = '[Training] Set Finished Trainings' ;
 export const START_TRAINING = '[Training]  Start Training';
@@ -19,7 +20,7 @@ export class SetFinsihedTrainigs implements Action{
 
 export class StartTraining implements Action{
     readonly type =START_TRAINING;
-
+ 
     constructor(public  payload : string){}
 }
 

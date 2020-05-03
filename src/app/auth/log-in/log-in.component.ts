@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { AuthService } from '../auth.service';
 import { UIService } from '../../shared/ui.service';
 import  * as fromRoot from './../../app.reducer';
+import { state } from '@angular/animations';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -19,10 +21,12 @@ export class LogInComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private uiService : UIService,
-    private store : Store< fromRoot.State>) { }
+    private store : Store<fromRoot.State>) { }
 
 
   ngOnInit(): void {
+    // this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     // this.loadingSubs = this.uiService.loadingStateChanged
     // .subscribe(isLoading =>{

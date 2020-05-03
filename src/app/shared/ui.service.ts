@@ -4,9 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable()
 export class UIService
 {
-
     constructor(private snackbar : MatSnackBar){}
-    showSnackBar(message , action, duration ){
+
+    
+    showSnackBar(message: string , action: string, duration: number ){
         this.snackbar.open(message, action ,{
             duration :duration
         });

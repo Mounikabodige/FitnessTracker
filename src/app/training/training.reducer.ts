@@ -8,12 +8,13 @@ import {
     START_TRAINING,
     STOP_TRAINING 
 } from './ training.actions';
+
 import * as fromRoot from '../app.reducer';
 
 export interface TrainingState{
     availableExercises: Exercise[];
     finishedExercises: Exercise[];
-    activeTraining : Exercise[];
+    activeTraining : Exercise;
 }
 
 
@@ -58,9 +59,9 @@ export function trainingReducer(state = initialState, action :TrainingActions){
 export const getTrainingstate =createFeatureSelector<TrainingState>('training');
 
 
-export const getAvailableTrainings = createSelector(getTrainingstate, (state : TrainingState) => state.availableExercises);
-export const getFinishedTrainings = createSelector(getTrainingstate, (state : TrainingState) => state.finishedExercises) ;
-export const getActiveTrainings = createSelector(getTrainingstate, (state : TrainingState) => state.activeTraining) ;
+export const getAvailableExcercises = createSelector(getTrainingstate, (state : TrainingState) => state.availableExercises);
+export const getFinishedExcercises = createSelector(getTrainingstate, (state : TrainingState) => state.finishedExercises) ;
+export const getActiveTraining = createSelector(getTrainingstate, (state : TrainingState) => state.activeTraining) ;
 
 export const getIsTraining  = createSelector(getTrainingstate, (state : TrainingState) => state.activeTraining !== null) ;
 

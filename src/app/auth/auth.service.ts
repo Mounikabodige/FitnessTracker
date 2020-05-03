@@ -29,10 +29,9 @@ export class AuthService {
                 this.router.navigate(['/training']);
             }
             else {
-
-        this.trainingService.cancelSubscriptions();
-        this.store.dispatch(new Auth.SetUnauthenticated());
-        this.router.navigate(['/login']);
+                this.trainingService.cancelSubscriptions();
+                this.store.dispatch(new Auth.SetUnauthenticated());
+                this.router.navigate(['/login']);
             }
         });
     }

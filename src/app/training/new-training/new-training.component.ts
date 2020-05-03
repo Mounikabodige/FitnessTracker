@@ -27,7 +27,7 @@ constructor(
 
   ngOnInit() {
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
-    this.exercises$ = this.store.select(fromTraining.getAvailableTrainings);
+    this.exercises$ = this.store.select(fromTraining.getAvailableExcercises);
     this.fetchExercises();
   }
 

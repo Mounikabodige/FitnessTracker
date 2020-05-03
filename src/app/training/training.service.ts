@@ -12,7 +12,6 @@ import * as UI from '../shared/ui.actions';
 import * as Training from './ training.actions';
 import * as fromTraining from './training.reducer';
 
-
 @Injectable()
 
 export class TrainingService{
@@ -67,33 +66,31 @@ export class TrainingService{
 
     completeExercise()
     {
-        this.store.select(fromTraining.getActiveTrainings).pipe(take(1)).subscribe(ex =>
+        this.store.select(fromTraining.getActiveTraining).pipe(take(1)).subscribe(ex =>
              {
-            //     this.addDataToDb({
-            //         ...ex,
-            //  date : new Date(),
-            //  state: 'completed'
-              //   });
+                this.addDataToDb({
+                    ...ex,
+             date : new Date(),
+             state: 'completed'
+                });
              this.store.dispatch(new Training.StopTraining());
-            console.log("Completed")
             });
         
     }
 
     cancelExercise(progress : number){
 
-        this.store.select(fromTraining.getActiveTrainings).pipe(take(1)).subscribe(ex =>
+        this.store.select(fromTraining.getActiveTraining).pipe(take(1)).subscribe(ex =>
             {
-            //     this.addDataToDb
-            //     ({
-            //         ...ex,
-            //         duration: ex.duration * ( progress / 100),
-            //         calories: ex.calories * ( progress / 100 ) ,
-            //         date:new Date(),
-            //           state : 'cancelled'
-            //         });
+                this.addDataToDb
+                ({
+                    ...ex,
+                    duration: ex.duration * ( progress / 100),
+                    calories: ex.calories * ( progress / 100 ) ,
+                    date:new Date(),
+                      state : 'cancelled'
+                    });
                this.store.dispatch(new Training.StopTraining());
-               console.log("cancelled")
 
             });
     }
