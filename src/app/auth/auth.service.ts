@@ -43,31 +43,26 @@ export class AuthService {
             authData.email,
             authData.password)
             .then(result =>{
-                // this.uiService.loadingStateChanged.next(false);
                 this.store.dispatch(new UI.StopLoading());
 
             })
             .catch(error => {
                 this.store.dispatch(new UI.StopLoading());
-                // this.uiService.loadingStateChanged.next(false);
                 this.uiService.showSnackBar(error.message,null, 3000);
             });
     }
 
 
     login(authData:AuthData){
-        // this.uiService.loadingStateChanged.next(true);
         this.store.dispatch(new UI.StartLoading());
         this.afauth.auth
         .signInWithEmailAndPassword(authData.email,
             authData.password)
             .then(result =>{  
-                // this.uiService.loadingStateChanged.next(false);
                 this.store.dispatch(new UI.StopLoading());
              })
             .catch(error => {
                 this.store.dispatch(new UI.StopLoading());
-                // this.uiService.loadingStateChanged.next(false);
                 this.uiService.showSnackBar(error.message,null, 3000);
 
                 });

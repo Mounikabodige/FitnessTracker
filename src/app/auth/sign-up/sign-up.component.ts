@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from '../auth.service';
-import { UIService } from 'src/app/shared/ui.service';
 import * as fromRoot from '../../app.reducer';
 
 @Component({
@@ -17,7 +16,6 @@ export class SignUpComponent implements OnInit {
   isLoading$  : Observable<boolean>;
 
   constructor(private authService:AuthService,
-    private uiService: UIService,
     private store : Store<fromRoot.State>) { }
 
   ngOnInit() {
